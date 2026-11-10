@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurevia Airlines - Flight Booking System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✈️ Aurevia Airlines</h1>
+            <p>Your Journey, Our Priority</p>
+        </div>
+
+        <div class="role-selector">
+            <button class="role-btn passenger" onclick="selectRole('Passenger')">
+                👤 Passenger
+            </button>
+            <button class="role-btn employee" onclick="selectRole('Employee')">
+                👨‍💼 Employee
+            </button>
+        </div>
+
+        <!-- Passenger Menu -->
+        <div id="passengerMenu" class="menu">
+            <h2>Passenger Services</h2>
+            <div class="menu-grid">
+                <div class="menu-item" onclick="showForm('search')">
+                    🔍 Search Flight
+                </div>
+                <div class="menu-item" onclick="showForm('book')">
+                    📅 Book Flight
+                </div>
+                <div class="menu-item" onclick="showForm('cancel')">
+                    ❌ Cancel Flight
+                </div>
+                <div class="menu-item" onclick="exitApp()">
+                    🚪 Exit
+                </div>
+            </div>
+        </div>
+
+        <!-- Employee Menu -->
+        <div id="employeeMenu" class="menu">
+            <h2>Employee Panel</h2>
+            <div class="menu-grid">
+                <div class="menu-item" onclick="showForm('add')">
+                    ➕ Add Flight
+                </div>
+                <div class="menu-item" onclick="showForm('delete')">
+                    🗑️ Delete Flight
+                </div>
+                <div class="menu-item" onclick="showForm('display')">
+                    📋 Display Flights
+                </div>
+                <div class="menu-item" onclick="exitApp()">
+                    🚪 Exit
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Flight Form -->
+        <div id="searchForm" class="form-container">
+            <h3>🔍 Search Flight</h3>
+            <div class="form-group">
+                <label>Source:</label>
+                <input type="text" id="searchSource" placeholder="Enter source city">
+            </div>
+            <div class="form-group">
+                <label>Destination:</label>
+                <input type="text" id="searchDest" placeholder="Enter destination city">
+            </div>
+            <button class="btn" onclick="searchFlight()">Search Flights</button>
+        </div>
+
+        <!-- Book Flight Form -->
+        <div id="bookForm" class="form-container">
+            <h3>📅 Book Flight</h3>
+            <div class="form-group">
+                <label>Flight ID:</label>
+                <input type="number" id="bookFlightId" placeholder="Enter flight ID">
+            </div>
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" id="passengerName" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label>Gender:</label>
+                <select id="passengerGender">
+                    <option value="">Select Gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Age:</label>
+                <input type="number" id="passengerAge" placeholder="Enter age">
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" id="passengerEmail" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label>Phone:</label>
+                <input type="tel" id="passengerPhone" placeholder="Enter phone number">
+            </div>
+            <button class="btn" onclick="bookFlight()">Book Flight</button>
+        </div>
+
+        <!-- Add Flight Form -->
+        <div id="addForm" class="form-container">
+            <h3>➕ Add New Flight</h3>
+            <div class="form-group">
+                <label>Flight ID:</label>
+                <input type="number" id="flightId" placeholder="Enter flight ID">
+            </div>
+            <div class="form-group">
+                <label>Flight Name:</label>
+                <input type="text" id="flightName" placeholder="e.g., AI-101">
+            </div>
+            <div class="form-group">
+                <label>Source:</label>
+                <input type="text" id="flightSource" placeholder="e.g., Delhi">
+            </div>
+            <div class="form-group">
+                <label>Destination:</label>
+                <input type="text" id="flightDest" placeholder="e.g., Mumbai">
+            </div>
+            <div class="form-group">
+                <label>Date:</label>
+                <input type="date" id="flightDate">
+            </div>
+            <div class="form-group">
+                <label>Time:</label>
+                <input type="time" id="flightTime">
+            </div>
+            <div class="form-group">
+                <label>Total Seats:</label>
+                <input type="number" id="totalSeats" placeholder="Total seats">
+            </div>
+            <div class="form-group">
+                <label>Available Seats:</label>
+                <input type="number" id="availableSeats" placeholder="Available seats">
+            </div>
+            <div class="form-group">
+                <label>Ticket Price:</label>
+                <input type="number" id="ticketPrice" step="0.01" placeholder="Ticket price">
+            </div>
+            <button class="btn" onclick="addFlight()">Add Flight</button>
+        </div>
+
+        <!-- Delete Flight Form -->
+        <div id="deleteForm" class="form-container">
+            <h3>🗑️ Delete Flight</h3>
+            <div class="form-group">
+                <label>Flight ID:</label>
+                <input type="number" id="deleteFlightId" placeholder="Enter flight ID to delete">
+            </div>
+            <button class="btn" onclick="deleteFlight()">Delete Flight</button>
+        </div>
+
+        <!-- Display Flights -->
+        <div id="displayForm" class="form-container">
+            <h3>📋 All Flights</h3>
+            <button class="btn" onclick="displayFlights()">Show All Flights</button>
+        </div>
+
+        <!-- Cancel Flight Form -->
+        <div id="cancelForm" class="form-container">
+            <h3>❌ Cancel Flight</h3>
+            <div class="form-group">
+                <label>Flight ID:</label>
+                <input type="number" id="cancelFlightId" placeholder="Enter flight ID to cancel">
+            </div>
+            <button class="btn" onclick="cancelFlight()">Cancel Booking</button>
+        </div>
+
+        <!-- Flights List -->
+        <div id="flightsList" class="flights-list">
+            <h3 id="listTitle">Flight Results</h3>
+            <div id="flightsContainer"></div>
+        </div>
+
+        <!-- Messages -->
+        <div id="message"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
